@@ -1,8 +1,8 @@
 const path = require('path');
+const webpack = require('webpack');
 const HtmlWebPackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    mode: 'none',
     entry: {
         homepage: ['./src/homepage.tsx'],
         vendor: ['react', 'react-dom']
@@ -11,7 +11,7 @@ module.exports = {
         path: path.resolve(__dirname, 'dist'),
         filename: 'js/[name].bundle.js'
     },
-    devtool: "source-map",
+    devtool: 'inline-source-map',
     resolve: {
         extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
     },
@@ -19,7 +19,9 @@ module.exports = {
         rules: [
             {
                 test: /\.tsx?$/,
-                loader: "awesome-typescript-loader"
+                use: 'ts-loader',
+                exclude: /node_modules/
+                // loader: "awesome-typescript-loader"
             }
         ]
     },
@@ -28,6 +30,14 @@ module.exports = {
         new HtmlWebPackPlugin({
             template: "./src/index.html",
             filename: "./index.html"
-        })
-    ]
+        }),
+        new webpack.LoaderOptionsPlugin({
+            minimize: true,
+            debug: false
+        }),
+    ],
+    devServer:{
+        port:3000,
+        historyApiFallback:true,
+    }
 };
