@@ -30,7 +30,7 @@ function startWebDevServer(port) {
         ]
     });
 
-    webpackconfig.entry.homepage.unshift('webpack-dev-server/client?http://localhost:' + port + '/', 'webpack/hot/dev-server');
+    webpackconfig.entry.main.unshift('webpack-dev-server/client?http://localhost:' + port + '/', 'webpack/hot/dev-server');
 
     var compiler = webpack(webpackconfig);
     var server = new webpackDevServer(compiler, {

@@ -14,7 +14,3 @@ class Homepage extends React.Component{
 
 export default Homepage
 
-ReactDom.render(
-    <Homepage></Homepage>,
-    document.getElementById("home")
-);
