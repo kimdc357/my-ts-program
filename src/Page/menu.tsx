@@ -1,10 +1,14 @@
 import React from 'react'
 
-const Menu = () => (
- 
-      <div>Menu</div>
+class Menu extends React.Component{
+    render(){
+        return(
+            <div>
+                menu
+            </div>
 
-  )
-
+        )
+    }
+}
 
 export default Menu
