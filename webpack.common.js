@@ -6,6 +6,9 @@ module.exports = {
     entry: {
         main: './src/index.tsx'
     },
+    resolve: {
+        extensions: ['.tsx', '.ts', '.js', '.json','jpg','png'],
+      },
     module: {
         rules: [{ 
             test: /\.tsx?$/,
