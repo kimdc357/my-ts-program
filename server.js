@@ -4,7 +4,7 @@ var open = require('open');
 
 
 
-portIsOccupied(3000)
+portIsOccupied(9000)
 
 function portIsOccupied(port) {
     var client = net.connect(port, 'localhost', function () {

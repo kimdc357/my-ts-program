@@ -9,9 +9,10 @@ const devConfig = {
 
     devServer: {
         open: true,
-        port: 3000,
+        port: 9000,
         hot: true,
-        hotOnly: true
+        hotOnly: true,
+        historyApiFallback: true,
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin()

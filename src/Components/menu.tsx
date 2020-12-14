@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
-import { State } from '../Redux/reducer'
+//import { State } from '../Redux/reducer'
 import { connect } from 'react-redux'
 
 export interface IMenuProps {
@@ -54,11 +54,11 @@ class Menu extends React.Component<IMenuProps,IMenuState>{
     }
 }
 
-const mapStateToProps = (state: State) => ({
-    pathname: state.router.location.pathname,
-    search: state.router.location.search,
-    hash: state.router.location.hash,
+// const mapStateToProps = (state: State) => ({
+//     pathname: state.router.location.pathname,
+//     search: state.router.location.search,
+//     hash: state.router.location.hash,
     
-})
+// })
 
-export default connect(mapStateToProps)(Menu)
+// export default connect(mapStateToProps)(Menu)

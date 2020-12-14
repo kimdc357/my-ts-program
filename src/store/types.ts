@@ -1,0 +1,2 @@
+export const MESSAGE='@@COMMON_MESSAGE'
+export const HIDDENALERT='@@COMMON_HIDDENALERT'

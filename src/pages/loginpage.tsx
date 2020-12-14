@@ -1,35 +1,42 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import { connect } from 'react-redux'
-import { Alert, Button, Input } from 'antd';
+import { Alert, Button } from 'antd';
 import { hiddenAlert, showMsg } from '../store/actions'
 import { State } from '../reducers';
-import  './login.scss'
-interface ILoginProps {
-
+import { LoginComponent } from '../components/login';
+import  './loginpage.scss'
+interface IHomePageProps {
+    isHiddenAlert: boolean;
+    hiddenAlert: (hid: boolean) => void;
+    showMsg: typeof showMsg;
+    msg: string;
 
 }
 
-interface ILoginPageState {
+interface IHomePageState {
+
+    hiddenAlert: (hid: boolean) => void;
+    showMsg: typeof showMsg;
 
 }
 
 
-class Login extends React.Component<ILoginProps, ILoginPageState> {
+class LoginPage extends React.Component<IHomePageProps, IHomePageState> {
 
     render() {
         return (
-            <div className="login">
-                <Input></Input>
-                <Input type="password"></Input>
-                <Button>登录</Button>
-                <Button>注册</Button>
+            <div className="root">
+
+                 <LoginComponent></LoginComponent>
+
             </div>
         )
     }
 
     onBtnClick() {
-
+        this.props.showMsg("asdsadsad");
+        this.props.hiddenAlert(!this.props.isHiddenAlert);
     }
 
 
@@ -53,8 +60,8 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 
-export const LoginComponent = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
-)(Login)
+)(LoginPage)
 
