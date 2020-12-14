@@ -3,15 +3,20 @@ import Layout, { Content} from 'antd/lib/layout/layout'
 import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu } from 'antd'
+import './content.scss'
 
 class Contents extends React.Component{
     render(){
         return(
-            <div>
-                <Content>
+            <div className="content">
                     <Layout >
-                        <Sider width={200}>
-                        <Menu>
+                        <Sider width={200} className="site-layout-background">
+                        <Menu
+                            mode="inline"
+                            defaultSelectedKeys={['1']}
+                            defaultOpenKeys={['sub1']}
+                            style={{ height: '100%', borderRight: 0 }}
+                        >
                         <SubMenu key="sub1" title="subnav 1">
                             <Menu.Item key="1">1</Menu.Item>
                             <Menu.Item key="2">2</Menu.Item>
@@ -24,15 +29,18 @@ class Contents extends React.Component{
                         </SubMenu>
                         </Menu>
                         </Sider>
-                        <Content style={{
-                        padding: 24,
-                        margin: 0,
-                        minHeight: 280,
-                                        }}>
+                        <Layout style={{ padding: '0 24px 24px' }}>
+                        <Content 
+                            className="site-layout-background"
+                            style={{
+                            padding: 24,
+                            margin: 0,
+                            minHeight: 280, }}
+                                        >
                             Content
                         </Content>
+                        </Layout>
                     </Layout>   
-                </Content>
             </div>
         )
     }

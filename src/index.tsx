@@ -5,6 +5,8 @@ import createstore,{ history } from './Redux/store'
 import { ConnectedRouter } from 'connected-react-router'
 import Routers from './Router/router'
 import Home from './Page/Home/home'
+import Login from './Page/Login/login'
+import './index.scss'
 
 const store=createstore()
 
