@@ -16,12 +16,12 @@ export default function createstore(preloaded?:any){
     const store=createStore(rootReducer(history),preloaded,roters)
 
 
-    if (module.hot) {
-        // Enable Webpack hot module replacement for reducers
-        module.hot.accept('./reducer', () => {
-            store.replaceReducer(rootReducer(history));
-        });
-      }
+    // if (module.hot) {
+    //     // Enable Webpack hot module replacement for reducers
+    //     module.hot.accept('./reducer', () => {
+    //         store.replaceReducer(rootReducer(history));
+    //     });
+    //   }
 
     return store
 }

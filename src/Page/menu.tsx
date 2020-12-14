@@ -54,7 +54,8 @@ class Menu extends React.Component<IMenuProps,IMenuState>{
     }
 }
 
-const mapStateToProps = (state: State) => ({
+const mapStateToProps = (state:any) => ({
+    
     pathname: state.router.location.pathname,
     search: state.router.location.search,
     hash: state.router.location.hash,

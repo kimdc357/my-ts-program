@@ -5,14 +5,9 @@ import { connectRouter,RouterState } from 'connected-react-router'
 
 
 
-const defaults = {
-    name:'',
-    list:[''],
-}
-
 const rootReducer=(history:History)=>combineReducers({
     router: connectRouter(history)
-    
+
 })
 
 export interface State{
@@ -20,14 +15,6 @@ export interface State{
 }
 
 
-function message_list(state=defaults,action:any){
-
-    if(action.typp===MESSAGE_LIST){
-
-        return state;
-    }
-    return state;
-}
 
 
 

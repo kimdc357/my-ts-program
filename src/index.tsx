@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 import createstore,{ history } from './Redux/store'
 import { ConnectedRouter } from 'connected-react-router'
 import Routers from './Router/router'
+import Home from './Page/Home/home'
 
 const store=createstore()
 
@@ -12,10 +13,7 @@ class Index extends React.Component{
         return(
             <Provider store={store}>
                 <ConnectedRouter history={history}>
-                    <Routers/>
-                    {console.log('1111111111111111111')}
-                   {console.log(history)}   
-                    
+                    <Home/>
                 </ConnectedRouter>
             </Provider>
             
