@@ -4,6 +4,7 @@ import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu } from 'antd'
 import './content.scss'
+import Login from '../Login/login'
 
 class Contents extends React.Component{
     render(){
@@ -11,7 +12,7 @@ class Contents extends React.Component{
             <div className="content">
                     <Layout >
                         <Sider width={200} className="site-layout-background">
-                        <Menu
+                        {/* <Menu
                             mode="inline"
                             defaultSelectedKeys={['1']}
                             defaultOpenKeys={['sub1']}
@@ -27,7 +28,11 @@ class Contents extends React.Component{
                             <Menu.Item key="5">5</Menu.Item>
                             <Menu.Item key="6">6</Menu.Item>
                         </SubMenu>
-                        </Menu>
+                        </Menu> */}
+                        <div>
+                            登陆
+                            注册
+                        </div>
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px' }}>
                         <Content 
@@ -37,7 +42,7 @@ class Contents extends React.Component{
                             margin: 0,
                             minHeight: 280, }}
                                         >
-                            Content
+                            <Login></Login>
                         </Content>
                         </Layout>
                     </Layout>   
