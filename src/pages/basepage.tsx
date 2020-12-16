@@ -1,15 +1,10 @@
 import * as React from 'react'
-import * as ReactDom from 'react-dom'
 import { connect } from 'react-redux'
 import { Alert, Button } from 'antd';
 import { hiddenAlert, showMsg } from '../store/actions'
 import { State } from '../reducers';
-import { LoginComponent } from '../components/login';
-import { BasePage, baseP, basepageprops, basepagestate } from './basepage'
-import './loginpage.scss'
-import { BaseComponent } from '../components/basecomponent';
 
-export interface ILoginPageProps {
+export interface IBasePageProps {
     isHiddenAlert?: boolean;
     hiddenAlert?: (hid: boolean) => void;
     showMsg?: typeof showMsg;
@@ -18,48 +13,46 @@ export interface ILoginPageProps {
 
 }
 
-export interface ILoginPageState {
+export interface IBasePageState {
     hiddenAlert?: (hid: boolean) => void;
     showMsg?: typeof showMsg;
 }
 
-
-export type loginpageprops = basepageprops;
-export type loginpagestate = basepagestate;
-
+export type basepageprops=IBasePageProps;
+export type basepagestate=IBasePageState;
 
 
+export class BasePage<P extends basepageprops, S extends basepagestate> extends React.Component<P, S>{
 
-class LoginPage extends React.Component<ILoginPageProps, ILoginPageState> {
+    private _className = "program-page";
 
-    constructor(props:any){
+
+    constructor(props?: P) {
         super(props)
     }
-
-
     render() {
         return (
-            <BasePage {...this.props}>
-                {/* {this.props.isHiddenAlert && (
+            <>
+                {this.props.isHiddenAlert && (
                     <Alert message={this.props.msg} closable></Alert>
-                )} */}
+                )}
 
-                {/* <div >
-                    <Button onClick={() => this.props.showMsg("22222222")}>22222222222</Button>
-
-                </div> */}
-                <div className="root">
-                    <LoginComponent {...this.props}></LoginComponent>
+                <div className={this._className}>
+                    <Button onClick={() => this.alertMsg("222")}>登录1111</Button>
+                    {this.props.children}
                 </div>
-            </BasePage>
-
-
+            </>
 
         )
+
     }
+
+    alertMsg(msg: string) {
+        this.props.showMsg(msg);
+
+    }
+
 }
-
-
 const mapStateToProps = (state: State) => {
     return {
         isHiddenAlert: state.homepageState.hiddenAlert,
@@ -76,7 +69,7 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 
-export const loginP = connect(
+export const baseP = connect(
     mapStateToProps,
     mapDispatchToProps
-)(LoginPage)
+)(BasePage)

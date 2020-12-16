@@ -3,38 +3,44 @@ import { connect } from 'react-redux'
 import { Alert, Button, Input } from 'antd';
 import { hiddenAlert, showMsg } from '../store/actions'
 import { State } from '../reducers';
-import { BaseCompontet } from './basecomponent'
+import { BaseComponent, basecomponentprops, basecomponentstate } from './basecomponent'
 import './login.scss'
 interface ILoginProps {
 
+    visable?: boolean;
 
 }
 
-interface ILoginPageState {
+interface ILoginState {
 
 }
 
+type baseProps = ILoginProps & basecomponentprops;
+type baseState = ILoginState & basecomponentstate;
 
-class Login extends BaseCompontet<ILoginProps, ILoginPageState> {
-    constructor(props?: ILoginProps) {
+
+
+class Login extends BaseComponent<baseProps, baseState> {
+    constructor(props?: baseProps) {
         super(props);
     }
     render() {
         return (
-            <BaseCompontet>
-                <div className="login">
+            <BaseComponent clssName="login">
+                <div className={this.getClassName("login")}>
                     <Input></Input>
                     <Input type="password"></Input>
-                    <Button>登录</Button>
+                    <Button onClick={()=>this.onBtnClick()}>登录</Button>
                     <Button>注册</Button>
                 </div>
-            </BaseCompontet>
+            </BaseComponent>
 
         )
     }
 
     onBtnClick() {
-
+        console.log("111")
+        this.props.showMsg("dddddd");
     }
 
 
