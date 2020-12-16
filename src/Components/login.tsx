@@ -1,10 +1,10 @@
 import * as React from 'react'
-import * as ReactDom from 'react-dom'
 import { connect } from 'react-redux'
 import { Alert, Button, Input } from 'antd';
 import { hiddenAlert, showMsg } from '../store/actions'
 import { State } from '../reducers';
-import  './login.scss'
+import { BaseCompontet } from './basecomponent'
+import './login.scss'
 interface ILoginProps {
 
 
@@ -15,16 +15,21 @@ interface ILoginPageState {
 }
 
 
-class Login extends React.Component<ILoginProps, ILoginPageState> {
-
+class Login extends BaseCompontet<ILoginProps, ILoginPageState> {
+    constructor(props?: ILoginProps) {
+        super(props);
+    }
     render() {
         return (
-            <div className="login">
-                <Input></Input>
-                <Input type="password"></Input>
-                <Button>登录</Button>
-                <Button>注册</Button>
-            </div>
+            <BaseCompontet>
+                <div className="login">
+                    <Input></Input>
+                    <Input type="password"></Input>
+                    <Button>登录</Button>
+                    <Button>注册</Button>
+                </div>
+            </BaseCompontet>
+
         )
     }
 
