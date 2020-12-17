@@ -1,10 +1,10 @@
 import { takeEvery } from 'redux-saga/effects'
-import { MESSAGE_LIST } from './action'
+import { MESSAGE_INFO } from './action'
 
 
 //generator
 function* mysaga(){
-    yield takeEvery(MESSAGE_LIST,message)
+    yield takeEvery(MESSAGE_INFO,message)
 } 
 
 function* message(){

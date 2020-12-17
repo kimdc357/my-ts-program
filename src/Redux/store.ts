@@ -1,4 +1,4 @@
-import { createStore , applyMiddleware } from 'redux'
+import { createStore , applyMiddleware,compose} from 'redux'
 import createSagaMiddleware from 'redux-saga'
 import rootReducer from './reducer'
 import { createBrowserHistory } from 'history'
@@ -11,17 +11,21 @@ export const history=createBrowserHistory();
 // const sagas = applyMiddleware(createsaga);
 
 export default function createstore(preloaded?:any){
-    const roters=applyMiddleware(routerMiddleware(history));
+    //const roters=applyMiddleware(routerMiddleware(history));
+    const composeEnhancer: typeof compose = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
-    const store=createStore(rootReducer(history),preloaded,roters)
+    const store=createStore(
+        rootReducer(history),
+        preloaded,
+        composeEnhancer(applyMiddleware(routerMiddleware(history),),),)
 
 
-    // if (module.hot) {
-    //     // Enable Webpack hot module replacement for reducers
-    //     module.hot.accept('./reducer', () => {
-    //         store.replaceReducer(rootReducer(history));
-    //     });
-    //   }
+    if (module.hot) {
+        // Enable Webpack hot module replacement for reducers
+        module.hot.accept('./reducer', () => {
+            store.replaceReducer(rootReducer(history));
+        });
+      }
 
     return store
 }

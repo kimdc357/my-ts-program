@@ -4,7 +4,7 @@ import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu } from 'antd'
 import './content.scss'
-import Login from '../Login/login'
+import {Login,logins} from '../Login/login'
 
 class Contents extends React.Component{
     render(){
@@ -43,6 +43,7 @@ class Contents extends React.Component{
                             minHeight: 280, }}
                                         >
                             <Login></Login>
+                        
                         </Content>
                         </Layout>
                     </Layout>   

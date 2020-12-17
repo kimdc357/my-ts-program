@@ -1,6 +1,6 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
-import { messageAction } from '../Redux/actions'
+import { message_info } from '../Redux/actions'
 import createstore from '../Redux/store'
 
 class Homepage extends React.Component{
@@ -15,11 +15,11 @@ class Homepage extends React.Component{
     }
 
     onClicks(){
-        const action=messageAction('seccess')
+        const action=message_info('seccess')
         const store=createstore()
         console.log(action)
         console.log(store)
-        //store.dispatch(action)
+       
     }
 
 
