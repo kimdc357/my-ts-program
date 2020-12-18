@@ -8,11 +8,11 @@ import './login.scss'
 interface ILoginProps {
 
     visable?: boolean;
-
+    showMsg?:any;
 }
 
 interface ILoginState {
-
+    showMsg?:any;
 }
 
 type baseProps = ILoginProps & basecomponentprops;
@@ -26,12 +26,12 @@ class Login extends BaseComponent<baseProps, baseState> {
     }
     render() {
         return (
-            <BaseComponent clssName="login">
+            <BaseComponent clssName="login" {...this.props}>
                 <div className={this.getClassName("login")}>
                     <Input></Input>
                     <Input type="password"></Input>
-                    <Button onClick={()=>this.onBtnClick()}>登录</Button>
-                    <Button>注册</Button>
+                    <Button onClick={()=>this.onBtnClick()}>t</Button>
+                    <Button>c</Button>
                 </div>
             </BaseComponent>
 
@@ -50,21 +50,19 @@ class Login extends BaseComponent<baseProps, baseState> {
 
 const mapStateToProps = (state: State) => {
     return {
-        isHiddenAlert: state.homepageState.hiddenAlert,
-        msg: state.homepageState.message
+      
     }
 }
 
 const mapDispatchToProps = (dispatch: any) => {
     return {
-        hiddenAlert: (show: boolean) => { dispatch(hiddenAlert(show)) },
         showMsg: (msg: string) => { dispatch(showMsg(msg)) }
 
     }
 }
 
 
-export const LoginComponent = connect(
+export default connect(
     mapStateToProps,
     mapDispatchToProps
 )(Login)

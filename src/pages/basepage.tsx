@@ -8,8 +8,7 @@ export interface IBasePageProps {
     isHiddenAlert?: boolean;
     hiddenAlert?: (hid: boolean) => void;
     showMsg?: typeof showMsg;
-    msg?: string;
-    alertMsg?: (msg: string) => void;
+    message?: string;
 
 }
 
@@ -22,7 +21,7 @@ export type basepageprops=IBasePageProps;
 export type basepagestate=IBasePageState;
 
 
-export class BasePage<P extends basepageprops, S extends basepagestate> extends React.Component<P, S>{
+export  class BasePage<P extends basepageprops, S extends basepagestate> extends React.Component<P, S>{
 
     private _className = "program-page";
 
@@ -34,13 +33,10 @@ export class BasePage<P extends basepageprops, S extends basepagestate> extends 
         return (
             <>
                 {this.props.isHiddenAlert && (
-                    <Alert message={this.props.msg} closable></Alert>
+                    <Alert message={this.props.message} closable onClose={()=>{this.hidAlert()}}></Alert>
                 )}
+                {this.props.children}
 
-                <div className={this._className}>
-                    <Button onClick={() => this.alertMsg("222")}>登录1111</Button>
-                    {this.props.children}
-                </div>
             </>
 
         )
@@ -52,11 +48,16 @@ export class BasePage<P extends basepageprops, S extends basepagestate> extends 
 
     }
 
+    hidAlert() {
+        this.props.hiddenAlert(false);
+
+    }
+
 }
 const mapStateToProps = (state: State) => {
     return {
         isHiddenAlert: state.homepageState.hiddenAlert,
-        msg: state.homepageState.message
+        message: state.homepageState.message
     }
 }
 
@@ -69,7 +70,7 @@ const mapDispatchToProps = (dispatch: any) => {
 }
 
 
-export const baseP = connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(BasePage)
+// export default connect(
+//     mapStateToProps,
+//     mapDispatchToProps
+// )(BasePage)

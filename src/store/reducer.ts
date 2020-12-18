@@ -17,9 +17,10 @@ function homep(state = homePaheState, action: any) {
             state.hiddenAlert = action.data;
             return { ...state };
         case MESSAGE:
-            state.hiddenAlert=true;
-            state.message = action.data;
-            return { ...state };
+            return Object.assign({}, state, {
+                hiddenAlert : true,
+                message : action.data
+              })
         default:
             return state;
     }
