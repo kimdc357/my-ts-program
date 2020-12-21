@@ -2,11 +2,32 @@ import * as React from 'react'
 import Layout, { Content} from 'antd/lib/layout/layout'
 import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
-import { Menu } from 'antd'
+import { Menu, Button } from 'antd'
 import './content.scss'
-import {Login,logins} from '../Login/login'
+import {Login,Logins} from '../../Page/Login/login'
+import {Register} from '../../Page/Login/register'
 
-class Contents extends React.Component{
+export interface IContensProps{
+
+}
+
+export interface IcontensState{
+    contentpage?:any
+}
+
+
+class Contents extends React.Component<IContensProps,IcontensState>{
+
+    constructor(props?:IContensProps){
+        super(props)
+        this.state={contentpage:<Logins></Logins>}
+    }
+
+    componentDidMount(){
+        console.log()
+        
+    }
+
     render(){
         return(
             <div className="content">
@@ -30,8 +51,9 @@ class Contents extends React.Component{
                         </SubMenu>
                         </Menu> */}
                         <div>
-                            登陆
-                            注册
+                            <Button type='link' onClick={()=>this.onClickLink('denglu')}>登陆</Button>
+                            <Button type='link' onClick={()=>this.onClickLink('zhuce')}>注册</Button>
+                            
                         </div>
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px' }}>
@@ -42,13 +64,25 @@ class Contents extends React.Component{
                             margin: 0,
                             minHeight: 280, }}
                                         >
-                            <Login></Login>
-                        
+                            {this.state.contentpage?this.state.contentpage:null}
+                               {/* <Logins></Logins> */}
+                            
                         </Content>
                         </Layout>
                     </Layout>   
             </div>
         )
+    }
+
+    onClickLink(key:string){
+        switch(key){
+            case 'denglu':
+                this.setState({contentpage:<Logins></Logins>})
+                break;
+            case 'zhuce':
+                this.setState({contentpage:<Register></Register>})
+                break;
+        }
     }
 }
 

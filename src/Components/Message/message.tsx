@@ -37,7 +37,7 @@ export class Message<P extends messageprops,S extends messagestate> extends Reac
 
 const mapStateToProps=(state:State)=>{
     return{
-        msg:state.messageState.message_info
+        msg:state.messageState.message_error
     }
 }
 
@@ -49,7 +49,7 @@ const mapDispatchToProps=(dispatch:any)=>{
     }
 }
 
-export const msge=connect(
+export const Msge=connect(
     mapStateToProps,
     mapDispatchToProps
 )(Message)
