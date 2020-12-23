@@ -5,7 +5,7 @@ import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu, Button } from 'antd'
 import './content.scss'
 import {Login,Logins} from '../../Page/Login/login'
-import {Register} from '../../Page/Login/register'
+import {Register,Registers} from '../../Page/Login/register'
 
 export interface IContensProps{
 
@@ -80,7 +80,7 @@ class Contents extends React.Component<IContensProps,IcontensState>{
                 this.setState({contentpage:<Logins></Logins>})
                 break;
             case 'zhuce':
-                this.setState({contentpage:<Register></Register>})
+                this.setState({contentpage:<Registers></Registers>})
                 break;
         }
     }
