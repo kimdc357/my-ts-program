@@ -1,4 +1,4 @@
-import { MESSAGE_INFO,MESSAGE_SUCCESS,MESSAGE_ERROR,REGISTER } from './action'
+import { MESSAGE_INFO,MESSAGE_SUCCESS,MESSAGE_ERROR,REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR } from './action'
 
 export const message_info=(msg:any)=>({
     type:MESSAGE_INFO,
@@ -18,4 +18,24 @@ export const message_error=(msg:any)=>({
 export const register=(user:any)=>({
     type:REGISTER,
     data:user
+})
+
+export const alert_info=(alert:any)=>({
+    type:ALERT_INFO,
+    data:alert
+})
+
+export const alert_success=(alert:any)=>({
+    type:ALERT_SUCCESS,
+    data:alert
+})
+
+export const alert_error=(alert:any)=>({
+    type:ALERT_ERROR,
+    data:alert
+})
+
+export const alert_warning=(alert:any)=>({
+    type:ALERT_WARNING,
+    data:alert
 })
