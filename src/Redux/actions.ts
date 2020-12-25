@@ -15,7 +15,11 @@ export const message_error=(msg:any)=>({
     data:msg
 })
 
-export const register=(user:any)=>({
+export const register=(user:{
+    user:any,
+    resolve:(value?:any)=>void;
+    reject:(value?:any)=>void;
+})=>({
     type:REGISTER,
     data:user
 })
