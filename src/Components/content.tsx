@@ -4,8 +4,8 @@ import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu, Button } from 'antd'
 import './content.scss'
-import {Login,Logins} from '../../Page/Login/login'
-import {Register,Registers} from '../../Page/Login/register'
+import {Login,Logins} from './contents/login/login'
+import {Register,Registers} from './contents/login/register'
 
 export interface IContensProps{
 

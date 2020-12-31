@@ -1,14 +1,14 @@
 import * as React from 'react'
 import './login.scss'
 import { Button, Input, Row, Col, Form } from 'antd'
-import { Message, Msge, messageprops, messagestate,IMessageProps,IMessageState} from '../../Components/Message/message'
+import { Message, Msge, messageprops, messagestate,IMessageProps,IMessageState} from '../../message/message'
 import { connect } from 'react-redux'
-import { State } from '../../Redux/reducer'
-import { message_success, message_error, message_info } from '../../Redux/actions'
+import { State } from '../../../redux/reducer'
+import { message_success, message_error, message_info } from '../../../redux/action'
 import { Dispatch } from 'redux'
-import { Buttons, IButtonsProps, IButtonsState, ButtonAPP } from '../../Components/Customcontrol/button'
-import { InputsComponent, IptProps, IptState } from '../../Components/Customcontrol/input'
-import { Verifaction } from '../../Components/Login/verifaction'
+import { Buttons, IButtonsProps, IButtonsState, ButtonAPP } from '../../../field/button'
+import { InputsComponent, IptProps, IptState } from '../../../field/input'
+import { Verifaction } from './verifaction'
 
 export interface ILoginProps{
   

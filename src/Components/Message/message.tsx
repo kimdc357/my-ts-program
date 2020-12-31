@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import { Alert } from 'antd'
-import { message_success, message_error, message_info } from '../../Redux/actions'
-import { State } from '../../Redux/reducer'
+import { message_success, message_error, message_info } from '../../redux/action'
+import { State } from '../../redux/reducer'
 
 
 export interface IMessageProps{

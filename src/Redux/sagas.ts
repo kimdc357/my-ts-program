@@ -1,7 +1,7 @@
 import { takeEvery, put, takeLatest, select,all,call,delay,fork } from 'redux-saga/effects'
-import { REGISTER } from './action'
-import { register,message_info, alert_info, alert_error } from './actions'
-import { get_data, register_data} from '../Data/axios'
+import { REGISTER,REGISTER1 } from './action_types'
+import { register,message_info, alert_info, alert_error } from './action'
+import { get_data, register_data} from '../data/axios'
 import axios from 'axios'
 
 
@@ -46,13 +46,37 @@ function* register_test(){
 function* register_saga(d:any){
     console.log('666666666666666666')
     //yield delay(3000)
-    var reg:any=yield call(fn,'123');
+    //var reg:any=yield call(fn,'123');
 
-    var {data:{data:{user}}}=reg
-    var action =alert_info(user[0].username)
+    //var {data:{data:{user}}}=reg
+    var action =alert_info('OK')
     yield put(action);
     var action =alert_error('error')
     yield put(action);
+    d.data.resolve('12345');
+   
+    // const action =alert_info(user[0].username)
+    // //const action =message_info(users)
+    // yield put(action)
+    // try {
+
+    //     yield put(action);
+    //  } catch (error) {
+    //     yield put({type: "ALERT_ERROR", error});
+    //  }
+
+    //yield fork(register_test)
+}
+
+function* register_saga1(d:any){
+    console.log('666666666666666666')
+    //yield delay(3000)
+    //var reg:any=yield call(fn,'123');
+
+    //var {data:{data:{user}}}=reg
+    var action =alert_info('OK')
+    yield put(action);
+
     d.data.resolve('12345');
    
     // const action =alert_info(user[0].username)
@@ -78,7 +102,8 @@ function* registers(){
         console.log('state after', state)
       })
 
-    yield takeEvery(REGISTER,register_saga)
+      yield takeEvery(REGISTER,register_saga)
+      yield takeEvery(REGISTER1,register_saga1)
     //yield takeLatest(REGISTER, register_saga);
 } 
 

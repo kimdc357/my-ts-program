@@ -1,10 +1,10 @@
 import * as React from 'react'
 import * as ReactDom from 'react-dom'
 import { Provider } from 'react-redux'
-import createstore,{ history } from './Redux/store'
+import createstore,{ history } from './redux/store'
 import { ConnectedRouter } from 'connected-react-router'
-import Routers from './Router/router'
-import Home from './Page/Home/home'
+import Routers from './router'
+import Home from './components/home'
 
 import './index.scss'
 

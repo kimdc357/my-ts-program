@@ -1,28 +1,35 @@
 import { reduce } from 'lodash'
 import * as React from 'react'
 import { Button, Input, Row, Col, Form } from 'antd'
-import { Buttons, IButtonsProps, IButtonsState, ButtonAPP } from '../../Components/Customcontrol/button'
-import { InputsComponent, IptProps, IptState } from '../../Components/Customcontrol/input'
-import { Verifaction } from '../../Components/Login/verifaction'
+import { Buttons, IButtonsProps, IButtonsState, ButtonAPP } from '../../../field/button'
+import { InputsComponent, IptProps, IptState } from '../../../field/input'
+import { Verifaction } from './verifaction'
 import { connect } from 'react-redux'
-import { State } from '../../Redux/reducer'
-import { register,message_info,alert_info,alert_error,alert_success,alert_warning } from '../../Redux/actions'
-import { Message, Msge, messageprops, messagestate,IMessageProps,IMessageState} from '../../Components/Message/message'
-import { Alertss, IAlertProps, IAlertState} from '../../Components/Message/alert'
+import { State } from '../../../redux/reducer'
+import { register,message_info,alert_info,alert_error,alert_success,alert_warning,register1 } from '../../../redux/action'
+import { Message, Msge, messageprops, messagestate,IMessageProps,IMessageState} from '../../message/message'
+import { BaseAlert,AlertComponents, IAlertProps, IAlertState} from '../../message/alert'
+import alert from '../../../redux/alert_reducer'
 
 
 export interface IRegisterProps{
     register?:(user:{  user:any,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
+    register1?:(user:{  user:any,
+            resolve:(value?:any)=>void;
+            reject:(value?:any)=>void;})=>void;
     user:{
-        username:'',
-        password:''
+        username:string,
+        password:string
     }
 }
 
 export interface IRegisterState{
     register?:(user:{  user:any,
+        resolve:(value?:any)=>void;
+        reject:(value?:any)=>void;})=>void;
+    register1?:(user:{  user:any,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
     bian1?:any,
@@ -49,11 +56,14 @@ export class Register extends React.Component<RgisterProps,RegiserState>{
     }
 
     render(){
+        console.log('register    register    register    register    ')
+        console.log(this.props.alert.msg)
+        console.log(this.props.alert.types)
         return(
             <div className="register">
                 <Row>
                 <Col span={8}>
-                    <Msge></Msge>
+                   <Msge></Msge>
                 </Col>
                 <Col span={8}>
                     <div className="logs">
@@ -66,11 +76,13 @@ export class Register extends React.Component<RgisterProps,RegiserState>{
                     </Form.Item>
                     <Verifaction></Verifaction>
                     <Button type='primary' block onClick={()=>this.btnClick()}>注册</Button>
+                    <Button type='primary' block onClick={()=>this.btnClick1()}>注册</Button>
                     {/* <ButtonAPP type='primary' block  >注 册</ButtonAPP>   */}
                     </div>
                 </Col>
                 <Col span={8}>
-                    <Alertss></Alertss>
+                    {/* <Alerts alert={this.props.alert}></Alerts> */}
+                    <AlertComponents></AlertComponents>
                 </Col>
                 </Row>
             </div>
@@ -122,13 +134,26 @@ export class Register extends React.Component<RgisterProps,RegiserState>{
         });
        
     }
+
+    btnClick1(){
+        this.props.register1({
+            user:this.props.user,
+            resolve:(value?:any)=>{
+                console.log(this.props.alert)
+                console.log('11111111111111111');
+            },
+            reject:(value?:any)=>{
+                
+            }
+        });
+    }
 }
 
 const mapStateToProps=(state:State)=>{
     return{
-        user:state.registerState.user,
-        msg:state.messageState.message_info,
-        alert:state.alertState.alert
+         user:state.registerState.user,
+         msg:state.messageState.message_info,
+         alert:state.alertState.alert
     }
 }
 
@@ -137,6 +162,9 @@ const mapDispatchToProps=(dispatch:any)=>{
         register:(user:{  user:any,
             resolve:(value?:any)=>void;
             reject:(value?:any)=>void;})=>{dispatch(register(user))},
+        register1:(user:{  user:any,
+            resolve:(value?:any)=>void;
+            reject:(value?:any)=>void;})=>{dispatch(register1(user))},
         message_info:(msg:string)=>{dispatch(message_info(msg))},
         alert_info:(alert:any)=>{dispatch(alert_info(alert))},
         alert_success:(alert:any)=>{dispatch(alert_success(alert))},

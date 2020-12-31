@@ -1,7 +1,7 @@
 import React from 'react'
 import {Route,Switch } from 'react-router'
 
-import Home from '../Page/Home/home'
+import Home from './components/home'
 
 class Routers extends React.Component{
     render(){

@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { Alert} from 'antd'
 import { connect } from 'react-redux'
-import { State } from '../../Redux/reducer'
-import { alert_info, alert_success, alert_error, alert_warning } from '../../Redux/actions'
+import { State } from '../../redux/reducer'
+import { alert_info, alert_success, alert_error, alert_warning } from '../../redux/action'
 
 export interface IAlertProps{
     alert?:{
-        msg:string,
+        msg:'',
         types:any
     }
     alert_info?:(alert:any)=>void
@@ -16,6 +16,10 @@ export interface IAlertProps{
 }
 
 export interface IAlertState{
+    alert?:{
+        msg:'',
+        types:any
+    }
     alert_info?:(alert:any)=>void
     alert_success?:(alert:any)=>void
     alert_error?:(alert:any)=>void
@@ -23,16 +27,20 @@ export interface IAlertState{
 }
 
 
-export class Alerts extends React.Component<IAlertProps,IAlertState>{
+export class BaseAlert<P extends IAlertProps,S extends IAlertState> extends React.Component<P,S>{
 
-    constructor(props?:IAlertProps){
+    constructor(props?:P){
         super(props)
     }
 
     render(){
+        console.log('alert   alert   alert   alert   alert   ')
+        //console.log(this.props.alert)
+        console.log(this.props.alert.msg)
+        console.log(this.props.alert.types)
         return(
             <div>
-                <Alert message={this.props.alert.msg} type={this.props.alert.types} closable></Alert>
+                <Alert message={this.props.alert.msg} type={this.props.alert.types} closable ></Alert>
             </div>
         )
     }
@@ -53,7 +61,7 @@ const mapDispatchToProps=(dispatch:any)=>{
     }
 }
 
-export const Alertss=connect(
+export const AlertComponents=connect(
     mapStateToProps,
     mapDispatchToProps
-)(Alerts)
+)(BaseAlert)

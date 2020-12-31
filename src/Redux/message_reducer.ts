@@ -1,4 +1,4 @@
-import { MESSAGE_INFO, MESSAGE_SUCCESS, MESSAGE_ERROR} from './action'
+import { MESSAGE_INFO, MESSAGE_SUCCESS, MESSAGE_ERROR} from './action_types'
 
 export const messageState={
     message_info:'',
