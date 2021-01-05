@@ -1,22 +1,8 @@
-import { MESSAGE_INFO,MESSAGE_SUCCESS,MESSAGE_ERROR,REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR, REGISTER1 } from './action_types'
-
-export const message_info=(msg:any)=>({
-    type:MESSAGE_INFO,
-    data:msg
-})
-
-export const message_success=(msg:any)=>({
-    type:MESSAGE_SUCCESS,
-    data:msg
-})
-
-export const message_error=(msg:any)=>({
-    type:MESSAGE_ERROR,
-    data:msg
-})
+import {REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR, REGISTER1 } from './action_types'
+import {IUserInfo} from './user_reducer'
 
 export const register=(user:{
-    user:any,
+    user:IUserInfo,
     resolve:(value?:any)=>void;
     reject:(value?:any)=>void;
 })=>({
@@ -25,7 +11,7 @@ export const register=(user:{
 })
 
 export const register1=(user:{
-    user:any,
+    user:IUserInfo,
     resolve:(value?:any)=>void;
     reject:(value?:any)=>void;
 })=>({
@@ -33,22 +19,22 @@ export const register1=(user:{
     data:user
 })
 
-export const alert_info=(alert:any)=>({
+export const alert_info=(alert:string)=>({
     type:ALERT_INFO,
     data:alert
 })
 
-export const alert_success=(alert:any)=>({
+export const alert_success=(alert:string)=>({
     type:ALERT_SUCCESS,
     data:alert
 })
 
-export const alert_error=(alert:any)=>({
+export const alert_error=(alert:string)=>({
     type:ALERT_ERROR,
     data:alert
 })
 
-export const alert_warning=(alert:any)=>({
+export const alert_warning=(alert:string)=>({
     type:ALERT_WARNING,
     data:alert
 })

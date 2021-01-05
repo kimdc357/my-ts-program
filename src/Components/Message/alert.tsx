@@ -3,12 +3,10 @@ import { Alert} from 'antd'
 import { connect } from 'react-redux'
 import { State } from '../../redux/reducer'
 import { alert_info, alert_success, alert_error, alert_warning } from '../../redux/action'
+import { IAlertInfo } from '../../redux/alert_reducer'
 
 export interface IAlertProps{
-    alert?:{
-        msg:'',
-        types:any
-    }
+    alert?:IAlertInfo
     alert_info?:(alert:any)=>void
     alert_success?:(alert:any)=>void
     alert_error?:(alert:any)=>void
@@ -16,10 +14,7 @@ export interface IAlertProps{
 }
 
 export interface IAlertState{
-    alert?:{
-        msg:'',
-        types:any
-    }
+    alert?:IAlertInfo
     alert_info?:(alert:any)=>void
     alert_success?:(alert:any)=>void
     alert_error?:(alert:any)=>void
@@ -34,10 +29,6 @@ export class BaseAlert<P extends IAlertProps,S extends IAlertState> extends Reac
     }
 
     render(){
-        console.log('alert   alert   alert   alert   alert   ')
-        //console.log(this.props.alert)
-        console.log(this.props.alert.msg)
-        console.log(this.props.alert.types)
         return(
             <div>
                 <Alert message={this.props.alert.msg} type={this.props.alert.types} closable ></Alert>

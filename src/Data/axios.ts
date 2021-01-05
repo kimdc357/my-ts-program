@@ -1,12 +1,15 @@
 import axios from 'axios'
+import {IUserInfo} from '../redux/user_reducer'
 
-var url='http://localhost:4050/'
+var url='http://localhost:4050'
 
-export const register_data = (user:any)=>{
-    axios.post(url+'/register',user)
+export const get_data = ():Promise<any>=>{
+    var res=axios.get(url)
+    return res;
 }
 
-export const get_data = ()=>{
-    axios.get(url)
+export const register_axios=(user:IUserInfo):Promise<any>=>{
+    var res=axios.post(url+'/register',user)
+    return res;
 }
 

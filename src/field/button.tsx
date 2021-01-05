@@ -3,7 +3,6 @@ import { Button  } from 'antd'
 import { ButtonType ,BaseButtonProps } from 'antd/lib/button/button'
 import { connect } from 'react-redux'
 import { State } from '../redux/reducer'
-import { message_success, message_error, message_info } from '../redux/action'
 
 
 export interface IButtonsProps{

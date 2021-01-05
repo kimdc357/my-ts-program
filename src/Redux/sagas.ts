@@ -1,8 +1,10 @@
 import { takeEvery, put, takeLatest, select,all,call,delay,fork } from 'redux-saga/effects'
 import { REGISTER,REGISTER1 } from './action_types'
-import { register,message_info, alert_info, alert_error } from './action'
-import { get_data, register_data} from '../data/axios'
+import { register, alert_info, alert_error } from './action'
+import * as Axios from '../data/axios'
 import axios from 'axios'
+import { IUserInfo } from './user_reducer'
+
 
 
 function fn(id:string):Promise<any> {
@@ -18,6 +20,8 @@ function* register_test(){
             })
         }, 1000);
     });
+
+    
     
     const {data:{data:{user}}} =yield axios.get('http://localhost:4050')
     console.log(user)
@@ -45,14 +49,32 @@ function* register_test(){
 
 function* register_saga(d:any){
     console.log('666666666666666666')
+    // console.log(d.data.user.username)
+    // console.log(d.data.user.password)
+   
     //yield delay(3000)
+    let useradd:IUserInfo={username:d.data.user.username,password:d.data.user.password}
+    //let useradd={username:'admin123',password:'admin123'};
+
+    var res:any=yield call(Axios.register_axios,useradd) 
+
     //var reg:any=yield call(fn,'123');
 
-    //var {data:{data:{user}}}=reg
-    var action =alert_info('OK')
-    yield put(action);
-    var action =alert_error('error')
-    yield put(action);
+    var data=res
+    // console.log('+++++++++++++++++++++')
+    console.log(data)
+    console.log(data.data.code)
+
+    if(data.data.code==0){
+        var action =alert_info('OK')
+        yield put(action);
+    }else{
+        var action =alert_error(data.data.msg)
+        yield put(action);
+    }
+
+    
+    
     d.data.resolve('12345');
    
     // const action =alert_info(user[0].username)
@@ -70,26 +92,12 @@ function* register_saga(d:any){
 
 function* register_saga1(d:any){
     console.log('666666666666666666')
-    //yield delay(3000)
-    //var reg:any=yield call(fn,'123');
-
-    //var {data:{data:{user}}}=reg
     var action =alert_info('OK')
     yield put(action);
 
     d.data.resolve('12345');
    
-    // const action =alert_info(user[0].username)
-    // //const action =message_info(users)
-    // yield put(action)
-    // try {
-
-    //     yield put(action);
-    //  } catch (error) {
-    //     yield put({type: "ALERT_ERROR", error});
-    //  }
-
-    //yield fork(register_test)
+ 
 }
 
 //generator

@@ -4,7 +4,7 @@ import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu, Button } from 'antd'
 import './content.scss'
-import {Login,Logins} from './contents/login/login'
+import {Login,LoginComponent} from './contents/login/login'
 import {Register,Registers} from './contents/login/register'
 
 export interface IContensProps{
@@ -20,7 +20,7 @@ class Contents extends React.Component<IContensProps,IcontensState>{
 
     constructor(props?:IContensProps){
         super(props)
-        this.state={contentpage:<Logins></Logins>}
+        this.state={contentpage:<LoginComponent></LoginComponent>}
     }
 
     componentDidMount(){
@@ -77,7 +77,7 @@ class Contents extends React.Component<IContensProps,IcontensState>{
     onClickLink(key:string){
         switch(key){
             case 'denglu':
-                this.setState({contentpage:<Logins></Logins>})
+                this.setState({contentpage:<LoginComponent></LoginComponent>})
                 break;
             case 'zhuce':
                 this.setState({contentpage:<Registers></Registers>})

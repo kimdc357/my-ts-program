@@ -3,43 +3,43 @@ import * as React from 'react'
 import { Button, Input, Row, Col, Form } from 'antd'
 import { Buttons, IButtonsProps, IButtonsState, ButtonAPP } from '../../../field/button'
 import { InputsComponent, IptProps, IptState } from '../../../field/input'
-import { Verifaction } from './verifaction'
+import { Verifaction, IVerifactionProps, IVerifactionState} from './verifaction'
 import { connect } from 'react-redux'
 import { State } from '../../../redux/reducer'
-import { register,message_info,alert_info,alert_error,alert_success,alert_warning,register1 } from '../../../redux/action'
-import { Message, Msge, messageprops, messagestate,IMessageProps,IMessageState} from '../../message/message'
+import { register,alert_info,alert_error,alert_success,alert_warning,register1 } from '../../../redux/action'
 import { BaseAlert,AlertComponents, IAlertProps, IAlertState} from '../../message/alert'
 import alert from '../../../redux/alert_reducer'
+import { bindActionCreators } from 'redux'
+import {IUserInfo} from '../../../redux/user_reducer'
 
 
 export interface IRegisterProps{
-    register?:(user:{  user:any,
+    register?:(user:{  user:IUserInfo,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
-    register1?:(user:{  user:any,
+    register1?:(user:{  user:IUserInfo,
             resolve:(value?:any)=>void;
             reject:(value?:any)=>void;})=>void;
-    user:{
-        username:string,
-        password:string
-    }
+    user:IUserInfo
 }
 
 export interface IRegisterState{
-    register?:(user:{  user:any,
+    register?:(user:{  user:IUserInfo,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
-    register1?:(user:{  user:any,
+    register1?:(user:{  user:IUserInfo,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
     bian1?:any,
     bian2?:any,
-    pwd1?:any,
-    pwd2?:any
+    pwd1?:string,
+    pwd2?:string,
+    alertState:any
+    user:IUserInfo
 }
 
-type RgisterProps=IRegisterProps & IMessageProps & IAlertProps;
-type RegiserState=IRegisterState & IMessageState & IAlertState;
+type RgisterProps=IRegisterProps  & IAlertProps & IVerifactionProps;
+type RegiserState=IRegisterState  & IAlertState & IVerifactionState;
 
 
 export class Register extends React.Component<RgisterProps,RegiserState>{
@@ -51,28 +51,28 @@ export class Register extends React.Component<RgisterProps,RegiserState>{
             bian1:'',
             bian2:'',
             pwd1:'',
-            pwd2:''
+            pwd2:'',
+            bianState:'',
+            alertState:<AlertComponents></AlertComponents>,
+            user:{username:'',password:''}
         }
     }
 
     render(){
         console.log('register    register    register    register    ')
-        console.log(this.props.alert.msg)
-        console.log(this.props.alert.types)
         return(
             <div className="register">
                 <Row>
                 <Col span={8}>
-                   <Msge></Msge>
                 </Col>
                 <Col span={8}>
                     <div className="logs">
-                    <InputsComponent placeholder="用户名" />
+                    <InputsComponent placeholder="用户名" name='uid' onChange={this.onchangeuid.bind(this)} />
                     <Form.Item hasFeedback validateStatus={this.state.bian1} >
-                    <Input.Password placeholder="密码" name='pwd1' onChange={()=>this.onchangepwd1.bind(this)}/>
+                    <Input.Password placeholder="密码" name='pwd1' onChange={this.onchangepwd1.bind(this)}/>
                     </Form.Item>
                     <Form.Item hasFeedback validateStatus={this.state.bian2} >
-                    <Input.Password placeholder="确认密码" name='pwd2' onChange={()=>this.onchangepwd2.bind(this)} />
+                    <Input.Password placeholder="确认密码" name='pwd2' onChange={this.onchangepwd2.bind(this)} />
                     </Form.Item>
                     <Verifaction></Verifaction>
                     <Button type='primary' block onClick={()=>this.btnClick()}>注册</Button>
@@ -82,56 +82,106 @@ export class Register extends React.Component<RgisterProps,RegiserState>{
                 </Col>
                 <Col span={8}>
                     {/* <Alerts alert={this.props.alert}></Alerts> */}
-                    <AlertComponents></AlertComponents>
+                    {/* <AlertComponents></AlertComponents> */}
+                    {this.state.alertState?this.state.alertState:null}
                 </Col>
                 </Row>
             </div>
         )
     }
 
+    onchangeuid(e:any){
+        this.setState({
+            user:{
+                username:e.target.value,
+                password:''
+            }
+        })
+    }
+
     onchangepwd1(e:any){
         var pwd=e.target.value;
-        console.log(e.target.value)
-        if(pwd==''){
+        //console.log(e.target.value)
+        if(pwd==this.state.pwd2 && this.state.pwd2!=''){
             this.setState({
-                bian1:'success'
+                bian1:'success',
+                bian2:'success',
+                pwd1:pwd,
+                user:{
+                    username:this.state.user.username,
+                    password:e.target.value
+                }
+            })
+        }else if(pwd!=this.state.pwd2 && this.state.pwd2!=''){
+            this.setState({
+                bian1:'error',
+                bian2:'error',
+                pwd1:pwd,
+                user:{
+                    username:this.state.user.username,
+                    password:e.target.value
+                }
             })
         }else{
             this.setState({
-                bian1:'error'
+                pwd1:pwd,
+                user:{
+                    username:this.state.user.username,
+                    password:e.target.value
+                }
             })
         }
+
     }
 
     onchangepwd2(e:any){
         var pwd=e.target.value;
-        console.log(pwd)
-        if(pwd==''&& pwd==this.state.pwd1){
+       
+        if(pwd==this.state.pwd1){
             this.setState({
-                bian2:'success'
+                bian2:'success',
+                bian1:'success',
+                pwd2:pwd
             })
         }else{
             this.setState({
-                bian2:'error'
+                bian2:'error',
+                bian1:'error',
+                pwd2:pwd
             })
         }
     }
 
     btnClick(){
+        // console.log(this.state.bianState)
+
+        // console.log(this.state.user)
+       
+        if(this.state.bianState!='success'){
+            console.log('验证码错误！')
+        }else if(this.state.pwd1!=this.state.pwd2){
+            console.log('密码不一致，请从新输入！')
+        }
         
         this.props.register({
-            user:this.props.user,
+            user:this.state.user,
             resolve:(value?:any)=>{
-                console.log(value)
-                console.log(this.props.alert)
-                console.log(this.props.user);
-                console.log(this.props.msg);
-                console.log('0000000000000000000000');
+                //console.log(value)
+                //console.log(this.props.alert)
+                //console.log(this.props.user);
+                // console.log('0000000000000000000000');
             },
             reject:(value?:any)=>{
                 
             }
         });
+        this.setState({
+            alertState:''
+        })
+       
+        this.setState({
+            alertState:<AlertComponents></AlertComponents>
+        })
        
     }
 
@@ -146,26 +196,31 @@ export class Register extends React.Component<RgisterProps,RegiserState>{
                 
             }
         });
+        this.setState({
+            alertState:''
+        })
+        this.setState({
+            alertState:<AlertComponents></AlertComponents>
+        })
     }
 }
 
 const mapStateToProps=(state:State)=>{
     return{
          user:state.registerState.user,
-         msg:state.messageState.message_info,
          alert:state.alertState.alert
+    
     }
 }
 
 const mapDispatchToProps=(dispatch:any)=>{
     return{
-        register:(user:{  user:any,
+        register:(user:{  user:IUserInfo,
             resolve:(value?:any)=>void;
             reject:(value?:any)=>void;})=>{dispatch(register(user))},
-        register1:(user:{  user:any,
+        register1:(user:{  user:IUserInfo,
             resolve:(value?:any)=>void;
             reject:(value?:any)=>void;})=>{dispatch(register1(user))},
-        message_info:(msg:string)=>{dispatch(message_info(msg))},
         alert_info:(alert:any)=>{dispatch(alert_info(alert))},
         alert_success:(alert:any)=>{dispatch(alert_success(alert))},
         alert_error:(alert:any)=>{dispatch(alert_error(alert))},
