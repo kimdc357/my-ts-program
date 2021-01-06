@@ -9,6 +9,9 @@ module.exports = {
     },
     resolve: {
         extensions: ['.tsx', '.ts', '.js', '.json','jpg','png'],
+        alias: {
+             img: path.resolve(__dirname, '/src/img/'
+            　　)}
       },
     module: {
         rules: [{ 
@@ -20,7 +23,32 @@ module.exports = {
             use: ["style-loader", 
             "css-loader",
             "sass-loader"]
-         }
+         },
+         {
+
+            test: /\.(png|jpg)?$/,
+            use: [
+                {
+                  loader: 'url-loader',
+                  options: {
+                    limit: 8192
+                  }
+                }
+              ]
+        }
+        
+        //  {
+        //     test: /\.(gif|jpg|png|woff|svg|eot|ttf|otf|woff2)\??.*$/,
+        //     use: [
+        //       {
+        //         loader: 'file-loader',
+        //         options: {
+        //           name: '[path][name].[ext]'
+        //         }
+        //       }
+        //     ]
+        //   },
+
         ],
         
     },
@@ -28,7 +56,6 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: 'src/index.html'
         }),   
-
     ],
     output: {
         filename: '[name].js',

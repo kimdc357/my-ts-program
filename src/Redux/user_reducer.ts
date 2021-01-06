@@ -1,4 +1,5 @@
-import { REGISTER } from './action_types'
+import { REGISTER,LOGIN } from './action_types'
+import { produce } from 'immer'
 
 export interface IUserInfo{
     username:string,
@@ -21,6 +22,18 @@ export const  register=(state=userstate,action:any)=>{
         default :
             return state
     }
+}
+
+export const login=(state=userstate,action:any)=>{
+    return produce(state,draftState=>{
+        switch(action.type){
+            case LOGIN:
+                draftState.user=action.data
+                return draftState
+            default :
+                return draftState
+        }
+    }) 
 }
 
 

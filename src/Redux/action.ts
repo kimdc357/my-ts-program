@@ -1,4 +1,4 @@
-import {REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR, REGISTER1 } from './action_types'
+import {REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR, REGISTER1,LOGIN } from './action_types'
 import {IUserInfo} from './user_reducer'
 
 export const register=(user:{
@@ -7,6 +7,15 @@ export const register=(user:{
     reject:(value?:any)=>void;
 })=>({
     type:REGISTER,
+    data:user
+})
+
+export const login=(user:{
+    user:IUserInfo,
+    resolve:(value?:any)=>void;
+    reject:(value?:any)=>void;
+})=>({
+    type:LOGIN,
     data:user
 })
 

@@ -4,8 +4,8 @@ import Sider from 'antd/lib/layout/Sider'
 import SubMenu from 'antd/lib/menu/SubMenu'
 import { Menu, Button } from 'antd'
 import './content.scss'
-import {Login,LoginComponent} from './contents/login/login'
-import {Register,Registers} from './contents/login/register'
+import {LoginComponent} from './contents/login/login'
+import {RegistersComponent} from './contents/login/register'
 
 export interface IContensProps{
 
@@ -80,7 +80,7 @@ class Contents extends React.Component<IContensProps,IcontensState>{
                 this.setState({contentpage:<LoginComponent></LoginComponent>})
                 break;
             case 'zhuce':
-                this.setState({contentpage:<Registers></Registers>})
+                this.setState({contentpage:<RegistersComponent></RegistersComponent>})
                 break;
         }
     }

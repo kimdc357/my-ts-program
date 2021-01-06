@@ -1,6 +1,6 @@
 import { takeEvery, put, takeLatest, select,all,call,delay,fork } from 'redux-saga/effects'
-import { REGISTER,REGISTER1 } from './action_types'
-import { register, alert_info, alert_error } from './action'
+import { REGISTER,REGISTER1,LOGIN } from './action_types'
+import { register, alert_info, alert_error, alert_success } from './action'
 import * as Axios from '../data/axios'
 import axios from 'axios'
 import { IUserInfo } from './user_reducer'
@@ -90,6 +90,22 @@ function* register_saga(d:any){
     //yield fork(register_test)
 }
 
+function* login_saga(dt:any){
+    let useradd:IUserInfo={username:dt.data.user.username,password:dt.data.user.password}
+
+    var res:any=yield call(Axios.login_axios,useradd)
+
+    if(res.data.code=='1'){
+        var action=alert_error(res.data.msg)
+        yield put(action);
+    }else{
+        var action =alert_success('OK')
+        yield put(action);
+    }
+
+    dt.data.resolve(res)
+}
+
 function* register_saga1(d:any){
     console.log('666666666666666666')
     var action =alert_info('OK')
@@ -97,7 +113,6 @@ function* register_saga1(d:any){
 
     d.data.resolve('12345');
    
- 
 }
 
 //generator
@@ -111,6 +126,7 @@ function* registers(){
       })
 
       yield takeEvery(REGISTER,register_saga)
+      yield takeEvery(LOGIN,login_saga)
       yield takeEvery(REGISTER1,register_saga1)
     //yield takeLatest(REGISTER, register_saga);
 } 

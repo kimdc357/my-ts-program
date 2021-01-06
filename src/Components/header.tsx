@@ -1,6 +1,8 @@
 import * as React from 'react'
-import {Menu} from 'antd'
+import {Menu,Image} from 'antd'
 import { Header } from 'antd/lib/layout/layout'
+// import * as logo from '../img/images/logo.jpg'
+import * as logo from '../img/logo.jpg';
 import './header.scss'
 
 class Headers extends React.Component{
@@ -8,7 +10,9 @@ class Headers extends React.Component{
         return(
             <div className="headers">
                 <Header>
-                    <div className="logo">logo</div>
+                    <div className="logo">
+                        <Image src={logo}></Image>
+                    </div>
                     <div>
                         <Menu theme="dark" mode="horizontal" defaultSelectedKeys={['2']}>
                             <Menu.Item key="1">a</Menu.Item>

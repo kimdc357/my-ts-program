@@ -42,7 +42,7 @@ type RgisterProps=IRegisterProps  & IAlertProps & IVerifactionProps;
 type RegiserState=IRegisterState  & IAlertState & IVerifactionState;
 
 
-export class Register extends React.Component<RgisterProps,RegiserState>{
+export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
 
     constructor(props?:RgisterProps){
         super(props)
@@ -228,7 +228,7 @@ const mapDispatchToProps=(dispatch:any)=>{
     }
 }
 
-export const Registers=connect(
+export const RegistersComponent=connect(
     mapStateToProps,
     mapDispatchToProps
-)(Register)
+)(BaseRegister)

@@ -13,3 +13,8 @@ export const register_axios=(user:IUserInfo):Promise<any>=>{
     return res;
 }
 
+export const login_axios=(user:IUserInfo):Promise<any>=>{
+    var res=axios.post(url+'/login',user)
+    return res;
+}
+
