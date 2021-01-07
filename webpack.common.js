@@ -24,18 +24,29 @@ module.exports = {
             "css-loader",
             "sass-loader"]
          },
-         {
+        //  {
 
-            test: /\.(png|jpg)?$/,
+        //     test: /\.(png|jpg)?$/,
+        //     use: [
+        //         {
+        //           loader: 'url-loader',
+        //           options: {
+        //             limit: 8192
+        //           }
+        //         }
+        //       ]
+        // }
+        {
+            test: /\.(png|jpg|ico)?$/,
             use: [
-                {
-                  loader: 'url-loader',
-                  options: {
-                    limit: 8192
-                  }
-                }
-              ]
-        }
+              {
+                loader: 'file-loader',
+                options: {
+                    name: '[name].[ext]',
+                  },
+              },
+            ],
+          }
         
         //  {
         //     test: /\.(gif|jpg|png|woff|svg|eot|ttf|otf|woff2)\??.*$/,
