@@ -1,4 +1,3 @@
-import { fromPairs } from 'lodash'
 import { ALERT_INFO, ALERT_SUCCESS, ALERT_ERROR, ALERT_WARNING } from './action_types'
 import { produce } from 'Immer'
 

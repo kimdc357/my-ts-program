@@ -37,8 +37,6 @@ export class Verifaction extends React.Component<IVerifactionProps,IVerifactionS
 
        var yanzheng1= result//.toLowerCase();
 
-       //console.log(yanzheng1);
-
        this.setState({
         yanzheng:yanzheng1
        })

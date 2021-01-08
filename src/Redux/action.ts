@@ -1,5 +1,6 @@
-import {REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR, REGISTER1,LOGIN } from './action_types'
+import {REGISTER, ALERT_INFO, ALERT_SUCCESS, ALERT_WARNING, ALERT_ERROR,LOGIN,HEAD_MENU,USER_INFO } from './action_types'
 import {IUserInfo} from './user_reducer'
+import {IMenuInfo} from './menu_reducer'
 
 export const register=(user:{
     user:IUserInfo,
@@ -10,21 +11,23 @@ export const register=(user:{
     data:user
 })
 
-export const login=(user:{
-    user:IUserInfo,
-    resolve:(value?:any)=>void;
-    reject:(value?:any)=>void;
-})=>({
+export const login=(userid:string,pwd:string)=>({
     type:LOGIN,
-    data:user
+    userid:userid,
+    pwd:pwd
 })
 
-export const register1=(user:{
-    user:IUserInfo,
-    resolve:(value?:any)=>void;
-    reject:(value?:any)=>void;
+export const hedamenu=(menu:{
+    resolve:(menu?:IUserInfo)=>void;
 })=>({
-    type:REGISTER1,
+    type:HEAD_MENU,
+    data:menu
+})
+
+export const user_info=(user:{
+    user:IUserInfo,
+})=>({
+    type:USER_INFO,
     data:user
 })
 

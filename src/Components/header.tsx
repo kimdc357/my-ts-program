@@ -12,7 +12,7 @@ class Headers extends React.Component{
             <div className="headers">
                 <Header>
                     <div className="logo">
-                        <Image src='./dist/logo.jpg' ></Image>
+                        <Image src='./dist/logo.jpg' preview={false} ></Image>
                     </div>
                     <div>
                         <HeadMenuComponent></HeadMenuComponent>

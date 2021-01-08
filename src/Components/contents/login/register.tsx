@@ -6,7 +6,7 @@ import { InputsComponent, IptProps, IptState } from '../../../field/input'
 import { Verifaction, IVerifactionProps, IVerifactionState} from './verifaction'
 import { connect } from 'react-redux'
 import { State } from '../../../redux/reducer'
-import { register,alert_info,alert_error,alert_success,alert_warning,register1 } from '../../../redux/action'
+import { register,alert_info,alert_error,alert_success,alert_warning } from '../../../redux/action'
 import { BaseAlert,AlertComponents, IAlertProps, IAlertState} from '../../message/alert'
 import alert from '../../../redux/alert_reducer'
 import { bindActionCreators } from 'redux'
@@ -17,17 +17,11 @@ export interface IRegisterProps{
     register?:(user:{  user:IUserInfo,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
-    register1?:(user:{  user:IUserInfo,
-            resolve:(value?:any)=>void;
-            reject:(value?:any)=>void;})=>void;
     user:IUserInfo
 }
 
 export interface IRegisterState{
     register?:(user:{  user:IUserInfo,
-        resolve:(value?:any)=>void;
-        reject:(value?:any)=>void;})=>void;
-    register1?:(user:{  user:IUserInfo,
         resolve:(value?:any)=>void;
         reject:(value?:any)=>void;})=>void;
     bian1?:any,
@@ -59,7 +53,6 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
     }
 
     render(){
-        console.log('register    register    register    register    ')
         return(
             <div className="register">
                 <Row>
@@ -76,7 +69,6 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
                     </Form.Item>
                     <Verifaction></Verifaction>
                     <Button type='primary' block onClick={()=>this.btnClick()}>注册</Button>
-                    <Button type='primary' block onClick={()=>this.btnClick1()}>注册</Button>
                     {/* <ButtonAPP type='primary' block  >注 册</ButtonAPP>   */}
                     </div>
                 </Col>
@@ -101,7 +93,7 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
 
     onchangepwd1(e:any){
         var pwd=e.target.value;
-        //console.log(e.target.value)
+
         if(pwd==this.state.pwd2 && this.state.pwd2!=''){
             this.setState({
                 bian1:'success',
@@ -153,9 +145,6 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
     }
 
     btnClick(){
-        // console.log(this.state.bianState)
-
-        // console.log(this.state.user)
        
         if(this.state.bianState!='success'){
             console.log('验证码错误！')
@@ -166,10 +155,7 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
         this.props.register({
             user:this.state.user,
             resolve:(value?:any)=>{
-                //console.log(value)
-                //console.log(this.props.alert)
-                //console.log(this.props.user);
-                // console.log('0000000000000000000000');
+
             },
             reject:(value?:any)=>{
                 
@@ -182,27 +168,11 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
         this.setState({
             alertState:<AlertComponents></AlertComponents>
         })
+        var userinfo=JSON.parse(sessionStorage.getItem('user'))
+        console.log(userinfo)
        
     }
 
-    btnClick1(){
-        this.props.register1({
-            user:this.props.user,
-            resolve:(value?:any)=>{
-                console.log(this.props.alert)
-                console.log('11111111111111111');
-            },
-            reject:(value?:any)=>{
-                
-            }
-        });
-        this.setState({
-            alertState:''
-        })
-        this.setState({
-            alertState:<AlertComponents></AlertComponents>
-        })
-    }
 }
 
 const mapStateToProps=(state:State)=>{
@@ -218,9 +188,7 @@ const mapDispatchToProps=(dispatch:any)=>{
         register:(user:{  user:IUserInfo,
             resolve:(value?:any)=>void;
             reject:(value?:any)=>void;})=>{dispatch(register(user))},
-        register1:(user:{  user:IUserInfo,
-            resolve:(value?:any)=>void;
-            reject:(value?:any)=>void;})=>{dispatch(register1(user))},
+
         alert_info:(alert:any)=>{dispatch(alert_info(alert))},
         alert_success:(alert:any)=>{dispatch(alert_success(alert))},
         alert_error:(alert:any)=>{dispatch(alert_error(alert))},

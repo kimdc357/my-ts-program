@@ -12,17 +12,14 @@ import { alert_info,alert_error,alert_success,alert_warning,login } from '../../
 import {IUserInfo} from '../../../redux/user_reducer'
 
 export interface ILoginProps{
-    login?:(user:{user:IUserInfo,
-        resolve:(value?:any)=>void,
-        reject:(value?:any)=>void})=>void;
+    login?:(userid:string,pwd:string)=>void;
     user:IUserInfo
 }
 
 export interface ILoginState{
-    login?:(user:{user:IUserInfo,
-        resolve:(value?:any)=>void,
-        reject:(value?:any)=>void})=>void;
-    user:IUserInfo
+    login?:(userid:string,pwd:string)=>void;
+    userid:string
+    pwd:string
 }
 
 type loginprops= ILoginProps  & IButtonsProps & IptProps & IAlertProps ;
@@ -33,7 +30,8 @@ export class BaseLogin extends React.Component<loginprops,loginstate>{
     constructor(props?:loginprops){
         super(props)
         this.state={
-            user:{username:'',password:''}
+            userid:'',
+            pwd:''
         }
     }
 
@@ -60,32 +58,18 @@ export class BaseLogin extends React.Component<loginprops,loginstate>{
 
     ChangeUserid(e:any){
         this.setState({
-            user:{
-                username:e.target.value,
-                password:''
-            }
+            userid:e.target.value
         })
     }
 
     ChangePwd(e:any){
         this.setState({
-            user:{
-                username:this.state.user.username,
-                password:e.target.value
-            }
+            pwd:e.target.value
         })
     }
 
     BtnLogin(){
-        this.props.login({
-            user:this.state.user,
-            resolve:(value?:any)=>{
-                console.log(value)
-            },
-            reject:(value?:any)=>{
-
-            }
-        });
+        this.props.login(this.state.userid,this.state.pwd)
     }
    
 }
@@ -99,9 +83,7 @@ const mapStateToProps=(state:State)=>{
 
 const mapDispatchToProps=(dispatch:Dispatch)=>{
     return{
-        login:(user:{user:IUserInfo,
-            resolve:(value?:void)=>void,
-            reject:(value?:void)=>void})=>{dispatch(login(user))},
+        login:(userid:string,pwd:string)=>{dispatch(login(userid,pwd))},
         alert_info:(alert:any)=>{dispatch(alert_info(alert))},
         alert_success:(alert:any)=>{dispatch(alert_success(alert))},
         alert_error:(alert:any)=>{dispatch(alert_error(alert))},
