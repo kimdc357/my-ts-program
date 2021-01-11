@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import rootReducer from './reducer'
 import { createBrowserHistory } from 'history'
 import { routerMiddleware } from 'connected-react-router'
-import mysaga from './sagas'
+import rootSagas from './sagas'
 
 
 export const history=createBrowserHistory();
@@ -44,7 +44,7 @@ export default function createstore(preloaded?:any){
     //         store.replaceReducer(rootReducer(history));
     //     });
     //   }
-    sagaMiddleware.run(mysaga)
+    sagaMiddleware.run(rootSagas)
 
     return store
 }

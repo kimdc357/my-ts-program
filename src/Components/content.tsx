@@ -6,7 +6,7 @@ import { Menu, Button } from 'antd'
 import './content.scss'
 import {LoginComponent} from './contents/login/login'
 import {RegistersComponent} from './contents/login/register'
-import {LeftMenuComponent} from './contents/menu/leftmenu'
+// import {LeftMenuComponent} from './contents/menu/leftmenu'
 
 export interface IContensProps{
 

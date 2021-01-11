@@ -1,5 +1,5 @@
 import axios from 'axios'
-import {IUserInfo} from '../redux/user_reducer'
+import {IUserInfo} from '../redux/user/reducer'
 
 
 var url='http://localhost:4050'

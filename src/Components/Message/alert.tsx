@@ -1,58 +1,49 @@
 import * as React from 'react'
-import { Alert} from 'antd'
+import { Alert } from 'antd'
 import { connect } from 'react-redux'
-import { State } from '../../redux/reducer'
-import { alert_info, alert_success, alert_error, alert_warning } from '../../redux/action'
-import { IAlertInfo } from '../../redux/alert_reducer'
+import { rootState } from "../../redux/reducer"
+import { alertMessage } from '../../redux/page/action'
+import { IAlertInfo } from '../../redux/page/reducer'
 
-export interface IAlertProps{
-    alert?:IAlertInfo
-    alert_info?:(alert:any)=>void
-    alert_success?:(alert:any)=>void
-    alert_error?:(alert:any)=>void
-    alert_warning?:(alert:any)=>void
+export interface IAlertProps {
+    alert?: IAlertInfo
+    alert_message?: (alert: IAlertInfo) => void
 }
 
-export interface IAlertState{
-    alert?:IAlertInfo
-    alert_info?:(alert:any)=>void
-    alert_success?:(alert:any)=>void
-    alert_error?:(alert:any)=>void
-    alert_warning?:(alert:any)=>void
+export interface IAlertState {
+    alert?: IAlertInfo
+    alert_message?: (alert: IAlertInfo) => void
 }
 
 
-export class BaseAlert<P extends IAlertProps,S extends IAlertState> extends React.Component<P,S>{
+export class BaseAlert<P extends IAlertProps, S extends IAlertState> extends React.Component<P, S>{
 
-    constructor(props?:P){
+    constructor(props?: P) {
         super(props)
     }
 
-    render(){
-        return(
+    render() {
+        return (
             <div>
-                <Alert message={this.props.alert.msg} type={this.props.alert.types} closable ></Alert>
+                <Alert message={this.props.alert?.msg} type={this.props.alert?.types} closable ></Alert>
             </div>
         )
     }
 }
 
-const mapStateToProps=(state:State)=>{
-    return{
-        alert:state.alertState.alert
+const mapStateToProps = (state: rootState) => {
+    return {
+        alert: state.pageState.alert
     }
 }
 
-const mapDispatchToProps=(dispatch:any)=>{
-    return{
-        alert_info:(alert:any)=>{dispatch(alert_info(alert))},
-        alert_success:(alert:any)=>{dispatch(alert_success(alert))},
-        alert_error:(alert:any)=>{dispatch(alert_error(alert))},
-        alert_warning:(alert:any)=>{dispatch(alert_warning(alert))}
+const mapDispatchToProps = (dispatch: any) => {
+    return {
+        alertMessage: (alert: IAlertInfo) => { dispatch(alertMessage(alert)) }
     }
 }
 
-export const AlertComponents=connect(
+export const AlertComponents = connect(
     mapStateToProps,
     mapDispatchToProps
 )(BaseAlert)

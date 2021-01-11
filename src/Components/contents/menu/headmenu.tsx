@@ -1,16 +1,27 @@
 import * as React from 'react'
 import { connect } from 'react-redux' 
-import { State } from '../../../redux/reducer'
+import { rootState } from '../../../redux/reducer'
 import { Dispatch } from 'redux'
 import { Menu } from 'antd';
+import { headMenu } from '../../../redux/page/action'
+import { IHeadMenuInfo } from '../../../redux/page/reducer'
+
+
 const { SubMenu } = Menu;
 
 export interface IHeadMenuProps{
+    headMenu?:(menu:{ resolve?:(value?:IHeadMenuInfo)=>void,
+        })=>void,
 
+    headMenuResult?:IHeadMenuInfo,
+    data?:any
 }
 
 export interface IHeadMenuState{
+    headMenu?:( menu:{ resolve?:(value?:IHeadMenuInfo)=>void,
+    })=>void,
     current: string[],
+    data:any
 }
 
 export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>{
@@ -19,13 +30,37 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
         super(props)
         this.state = {
             current: ['mail'],
+            data:{}
           };
+    }
+
+    componentDidMount(){
+        this.props.headMenu({
+            resolve:(value?:IHeadMenuInfo)=>{
+
+                console.log(value)
+                this.setState({
+                    data:value
+                })
+            },
+        });
+
+    }
+
+    menuBind(data:any){
+        console.log(data.id)
+        
+           
+        
     }
 
     render(){
         return(
             <div className='headmenu'>
                  <Menu onClick={this.handleClick.bind(this)} selectedKeys={this.state.current} mode="horizontal" theme="dark">
+                     {
+                         this.menuBind(this.state.data)
+                     }
                     <Menu.Item key="mail">
                     Navigation One
                     </Menu.Item>
@@ -60,15 +95,15 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
 
 }
 
-const mapStateToProps=(state:State)=>{
+const mapStateToProps=(state:rootState)=>{
     return{
-    
+        headMenuResult:state.pageState.headMenuResult
     }
 }
 
 const mapDispatchToProps=(dispatch:Dispatch)=>{
     return{
-   
+        headMenu:(menu:{resolve?:(value?:IHeadMenuInfo)=>void,})=>dispatch(headMenu(menu))
     }
 }
 

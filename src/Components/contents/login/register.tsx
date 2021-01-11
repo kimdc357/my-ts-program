@@ -1,29 +1,29 @@
 import { reduce } from 'lodash'
 import * as React from 'react'
 import { Button, Input, Row, Col, Form } from 'antd'
-import { Buttons, IButtonsProps, IButtonsState, ButtonAPP } from '../../../field/button'
+import {  IButtonsProps, IButtonsState, ButtonComponent } from '../../../field/button'
 import { InputsComponent, IptProps, IptState } from '../../../field/input'
 import { Verifaction, IVerifactionProps, IVerifactionState} from './verifaction'
 import { connect } from 'react-redux'
-import { State } from '../../../redux/reducer'
-import { register,alert_info,alert_error,alert_success,alert_warning } from '../../../redux/action'
+import { rootState } from '../../../redux/reducer'
+import { alertMessage } from '../../../redux/page/action'
+import {register} from '../../../redux/user/action'
 import { BaseAlert,AlertComponents, IAlertProps, IAlertState} from '../../message/alert'
-import alert from '../../../redux/alert_reducer'
 import { bindActionCreators } from 'redux'
-import {IUserInfo} from '../../../redux/user_reducer'
+import {IUserInfo} from '../../../redux/user/reducer'
 
 
 export interface IRegisterProps{
-    register?:(user:{  user:IUserInfo,
-        resolve:(value?:any)=>void;
-        reject:(value?:any)=>void;})=>void;
+    register?:(user:IUserInfo,
+        resolve?:(value?:any)=>void,
+        reject?:(value?:any)=>void)=>void;
     user:IUserInfo
 }
 
 export interface IRegisterState{
-    register?:(user:{  user:IUserInfo,
-        resolve:(value?:any)=>void;
-        reject:(value?:any)=>void;})=>void;
+    register?:( user:IUserInfo,
+        resolve?:(value?:any)=>void,
+        reject?:(value?:any)=>void)=>void;
     bian1?:any,
     bian2?:any,
     pwd1?:string,
@@ -152,15 +152,7 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
             console.log('密码不一致，请从新输入！')
         }
         
-        this.props.register({
-            user:this.state.user,
-            resolve:(value?:any)=>{
-
-            },
-            reject:(value?:any)=>{
-                
-            }
-        });
+        this.props.register(this.state.user);
         this.setState({
             alertState:''
         })
@@ -175,24 +167,22 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
 
 }
 
-const mapStateToProps=(state:State)=>{
+const mapStateToProps=(state:rootState)=>{
     return{
-         user:state.registerState.user,
-         alert:state.alertState.alert
+         user:state.userinfoState.userinfoState,
+         alert:state.pageState.alert
     
     }
 }
 
 const mapDispatchToProps=(dispatch:any)=>{
     return{
-        register:(user:{  user:IUserInfo,
-            resolve:(value?:any)=>void;
-            reject:(value?:any)=>void;})=>{dispatch(register(user))},
+        register:(
+            user:IUserInfo,
+            resolve?:(value?:any)=>void,
+            reject?:(value?:any)=>void)=>{dispatch(register(user))},
 
-        alert_info:(alert:any)=>{dispatch(alert_info(alert))},
-        alert_success:(alert:any)=>{dispatch(alert_success(alert))},
-        alert_error:(alert:any)=>{dispatch(alert_error(alert))},
-        alert_warning:(alert:any)=>{dispatch(alert_warning(alert))}
+        alertMessage:(alert:any)=>{dispatch(alertMessage(alert))}
     }
 }
 

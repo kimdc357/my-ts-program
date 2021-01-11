@@ -1,8 +1,0 @@
-export const REGISTER='@@register'
-export const ALERT_INFO='@@alert_info'
-export const ALERT_SUCCESS='@@alert_success'
-export const ALERT_ERROR='@@alert_error'
-export const ALERT_WARNING='@@alert_warning'
-export const LOGIN='@@login'
-export const HEAD_MENU='@@head_menu'
-export const USER_INFO='@@user_info'
