@@ -14,7 +14,7 @@ export const checkVerifactions=(currentVerifaction:string,verifaction:string)=>(
 })
 
 export const headMenu=(menu:{
-    resolve?:(value?:IHeadMenuInfo)=>void
+    resolve?:(value?:any)=>void
 }
 )=>({
     type:HEAD_MENU,

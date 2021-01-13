@@ -7,21 +7,24 @@ import { headMenu } from '../../../redux/page/action'
 import { IHeadMenuInfo } from '../../../redux/page/reducer'
 
 
+
 const { SubMenu } = Menu;
 
 export interface IHeadMenuProps{
-    headMenu?:(menu:{ resolve?:(value?:IHeadMenuInfo)=>void,
+    headMenu?:(menu:{ resolve?:(value?:any)=>void,
         })=>void,
 
     headMenuResult?:IHeadMenuInfo,
-    data?:any
+    datas?:any
+    menus?:any
 }
 
 export interface IHeadMenuState{
-    headMenu?:( menu:{ resolve?:(value?:IHeadMenuInfo)=>void,
+    headMenu?:( menu:{ resolve?:(value?:any)=>void,
     })=>void,
     current: string[],
-    data:any
+    datas:any
+    menus:any
 }
 
 export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>{
@@ -30,59 +33,70 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
         super(props)
         this.state = {
             current: ['mail'],
-            data:{}
+            datas:{},
+            menus:{}
           };
     }
 
-    componentDidMount(){
+    componentWillMount(){
         this.props.headMenu({
-            resolve:(value?:IHeadMenuInfo)=>{
+            resolve:(value?:any)=>{
 
-                console.log(value)
                 this.setState({
-                    data:value
+                    datas:value
                 })
+
             },
         });
 
+        
     }
 
-    menuBind(data:any){
-        console.log(data.id)
-        
-           
-        
+    menuItemBind(data:any,id:any){
+        if(data.length>0){
+            return( 
+                data.map((menu:any,i:any)=>{
+                 if(menu.pid==id){
+                     if(menu.isLeaf==0){
+                         return (
+                         <SubMenu key={menu.key} title={menu.name}>
+                             {this.menuItemBind(data,menu.id)}
+                         </SubMenu>
+                         )
+                     }else{
+                       return (<Menu.Item key={menu.key}>{menu.name}</Menu.Item>)
+                     }
+                 }
+             })
+             )
+        }
     }
+
+    // menuItemSubBind(data:any,id:any){
+    //    return( data.map((menu:any,i:any)=>{
+    //         if(menu.pid==id){
+    //             if(menu.isLeaf==1){
+    //                 return (<Menu.Item key={menu.id}>{menu.name}</Menu.Item>)
+    //             }else{
+    //                 return(<SubMenu key={menu.id} title={menu.name}>
+    //                     {
+    //                     this.menuItemSubBind(data,menu.id)
+    //                     }
+    //                 </SubMenu>)
+    //             }
+    //         }
+    //     })  
+    //    )
+    // }
+
 
     render(){
         return(
             <div className='headmenu'>
                  <Menu onClick={this.handleClick.bind(this)} selectedKeys={this.state.current} mode="horizontal" theme="dark">
-                     {
-                         this.menuBind(this.state.data)
-                     }
-                    <Menu.Item key="mail">
-                    Navigation One
-                    </Menu.Item>
-                    <SubMenu key="sub4"  title="Navigation Three">
-                    <Menu.Item key="9">Option 9</Menu.Item>
-                    <Menu.Item key="10">Option 10</Menu.Item>
-                    <Menu.Item key="11">Option 11</Menu.Item>
-                    <Menu.Item key="12">Option 12</Menu.Item>
-                    </SubMenu>              
-                    <SubMenu key="sub2" title="Navigation Two">
-                    <Menu.Item key="5">Option 5</Menu.Item>
-                    <Menu.Item key="6">Option 6</Menu.Item>
-                    <SubMenu key="sub3" title="Submenu">
-                        <Menu.Item key="7">Option 7</Menu.Item>
-                        <Menu.Item key="8">Option 8</Menu.Item>
-                    </SubMenu>
-                    </SubMenu>              
-                    <Menu.Item key="alipay">
-                    <a href="https://ant.design" target="_blank" rel="noopener noreferrer">
-                        Navigation Four - Link
-                    </a>
-                    </Menu.Item>
+                   {
+                        this.menuItemBind(this.state.datas,0)
+                   }
                 </Menu>         
             </div>
         )
@@ -91,6 +105,10 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
     handleClick(e:any){
         console.log('click ', e);
         this.setState({ current: e.key });
+        console.log(e.key)
+        // import { hashHistory } from 'react-router';
+
+        // hashHistory.push(e.key）
     };
 
 }
@@ -103,7 +121,7 @@ const mapStateToProps=(state:rootState)=>{
 
 const mapDispatchToProps=(dispatch:Dispatch)=>{
     return{
-        headMenu:(menu:{resolve?:(value?:IHeadMenuInfo)=>void,})=>dispatch(headMenu(menu))
+        headMenu:(menu:{resolve?:(value?:any)=>void,})=>dispatch(headMenu(menu))
     }
 }
 
