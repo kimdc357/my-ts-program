@@ -18,9 +18,9 @@ export const login=(userid:string,pwd:string)=>({
     pwd
 })
 
-export const setUserInfo=(user:{
-    user:IUserInfo,
-})=>({
+export const setUserInfo=(
+    user:IUserInfo
+)=>({
     type:USER_INFO,
     data:user
 })

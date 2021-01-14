@@ -1,11 +1,11 @@
-import { VERIFACTION,ALET_MESSAGE,HEAD_MENU } from './types'
+import { VERIFACTION,ALET_MESSAGE,HEAD_MENU,HEAD_TEST } from './types'
 import { produce } from 'Immer'
 
 
 export interface PageState{
     alert:IAlertInfo,
     verifactionResult:boolean,
-    headMenuResult:IHeadMenuInfo
+    headMenuResult:any
 }
 
 
@@ -21,7 +21,8 @@ export interface IHeadMenuInfo{
     pid:number,
     isLeaf:number,
     status:number,
-    seq:number
+    seq:number,
+    key:string
 }
 
 
@@ -50,7 +51,10 @@ export const pageReducer=(state=alertstate,action:any)=>{
                 }
                 return draftState
             case HEAD_MENU:
-                draftState.headMenuResult=action.headMenuResult
+            case HEAD_TEST:
+                console.log('****************')
+                console.log(action)
+                draftState.headMenuResult=action.data
                 return draftState
             default:
                 return draftState

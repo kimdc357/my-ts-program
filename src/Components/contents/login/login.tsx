@@ -15,7 +15,7 @@ import { IAlertInfo } from '../../../redux/page/reducer'
 
 export interface ILoginProps {
     login?: (userid: string, pwd: string) => void,
-    user: IUserInfo,
+    user?: IUserInfo,
     checkVerifactions?:(cv:string,v:string) => void,
     verifactionResult?:boolean
 }
@@ -74,7 +74,11 @@ export class BaseLogin extends React.Component<loginprops, loginstate>{
     }
 
     BtnLogin = (e: any) => {
+        
         this.props.login(this.state.userid, this.state.pwd)
+        console.log(this.props.user)
+        console.log(this.props.alert)
+        console.log(this.state.alert)
     }
 
     onChangeyan = (v: string, cv: string) => {
@@ -88,7 +92,7 @@ export class BaseLogin extends React.Component<loginprops, loginstate>{
 const mapStateToProps = (state: rootState) => {
     return {
         alert: state.pageState.alert,
-        user: state.userinfoState.userinfoState,
+        user: state.userinfoState.userInfo,
         verifactionResult:state.pageState.verifactionResult
     }
 }

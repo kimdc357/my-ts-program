@@ -3,7 +3,7 @@ import { produce } from 'immer'
 import { Reducer } from 'redux'
 
 export interface UserState{
-    userinfoState:IUserInfo
+    userInfo:IUserInfo
 }
 
 

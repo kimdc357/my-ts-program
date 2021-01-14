@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { rootState } from '../../../redux/reducer'
 import { Dispatch } from 'redux'
 import { Menu } from 'antd';
-import { headMenu } from '../../../redux/page/action'
+import { headMenu,headMenutest } from '../../../redux/page/action'
 import { IHeadMenuInfo } from '../../../redux/page/reducer'
 
 
@@ -13,8 +13,7 @@ const { SubMenu } = Menu;
 export interface IHeadMenuProps{
     headMenu?:(menu:{ resolve?:(value?:any)=>void,
         })=>void,
-
-    headMenuResult?:IHeadMenuInfo,
+    headMenuResult?:any,
     datas?:any
     menus?:any
 }
@@ -23,6 +22,7 @@ export interface IHeadMenuState{
     headMenu?:( menu:{ resolve?:(value?:any)=>void,
     })=>void,
     current: string[],
+    headMenuResult?:any,
     datas:any
     menus:any
 }
@@ -39,20 +39,11 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
     }
 
     componentWillMount(){
-        this.props.headMenu({
-            resolve:(value?:any)=>{
-
-                this.setState({
-                    datas:value
-                })
-
-            },
-        });
-
-        
+        this.props.headMenu({});
     }
 
     menuItemBind(data:any,id:any){
+        if(data!=undefined){
         if(data.length>0){
             return( 
                 data.map((menu:any,i:any)=>{
@@ -70,6 +61,12 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
              })
              )
         }
+    }
+    }
+
+    componentDidMount(){
+       
+       console.log(this.props.headMenuResult)
     }
 
     // menuItemSubBind(data:any,id:any){
@@ -95,7 +92,7 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
             <div className='headmenu'>
                  <Menu onClick={this.handleClick.bind(this)} selectedKeys={this.state.current} mode="horizontal" theme="dark">
                    {
-                        this.menuItemBind(this.state.datas,0)
+                        this.menuItemBind(this.props.headMenuResult,0)
                    }
                 </Menu>         
             </div>
@@ -107,7 +104,6 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
         this.setState({ current: e.key });
         console.log(e.key)
         // import { hashHistory } from 'react-router';
-
         // hashHistory.push(e.key）
     };
 
@@ -121,7 +117,7 @@ const mapStateToProps=(state:rootState)=>{
 
 const mapDispatchToProps=(dispatch:Dispatch)=>{
     return{
-        headMenu:(menu:{resolve?:(value?:any)=>void,})=>dispatch(headMenu(menu))
+        headMenu:(menu:{resolve?:(value?:any)=>void,})=>dispatch(headMenu(menu)),
     }
 }
 

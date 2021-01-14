@@ -169,7 +169,7 @@ export class BaseRegister extends React.Component<RgisterProps,RegiserState>{
 
 const mapStateToProps=(state:rootState)=>{
     return{
-         user:state.userinfoState.userinfoState,
+         user:state.userinfoState.userInfo,
          alert:state.pageState.alert
     
     }

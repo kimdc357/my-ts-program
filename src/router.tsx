@@ -10,7 +10,7 @@ class Routers extends React.Component{
                 <Switch>
                     <Route exact path="/" component={Home} />
                 </Switch>
-                </div>
+            </div>
         )
     }
 }

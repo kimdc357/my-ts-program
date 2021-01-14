@@ -31,7 +31,8 @@ function* loginSaga(action: ReturnType<typeof login>) {
         let alert : IAlertInfo={msg:res.data.msg,types:'error'}
         yield put(alertMessage(alert));
     } else {
-        yield put(setUserInfo(res.data.data.user));
+        let userinfo: IUserInfo = { username:res.data.data.user.username }
+        yield put(setUserInfo(userinfo));
         let alert : IAlertInfo={msg:'OK!',types:'success'}
         yield put(alertMessage(alert));
     }

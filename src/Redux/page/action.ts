@@ -1,4 +1,4 @@
-import { VERIFACTION,ALET_MESSAGE,HEAD_MENU } from './types'
+import { VERIFACTION,ALET_MESSAGE,HEAD_MENU,HEAD_TEST } from './types'
 import { IAlertInfo,IHeadMenuInfo } from './reducer'
 
 export const alertMessage=(alert:IAlertInfo)=>({
@@ -18,5 +18,10 @@ export const headMenu=(menu:{
 }
 )=>({
     type:HEAD_MENU,
+    data:menu
+})
+
+export const headMenutest=(menu:any)=>({
+    type:HEAD_TEST,
     data:menu
 })
