@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {IUserInfo} from '../redux/user/reducer'
+import {IHeadMenuInfo } from '../redux/page/reducer'
 
 
 var url='http://localhost:4050'
@@ -19,8 +20,8 @@ export const login_axios=(user:IUserInfo):Promise<any>=>{
     return res;
 }
 
-export const head_menu_axios=():Promise<any>=>{
-    var res=axios.post(url+'/menu')
+export const head_menu_axios=(menu:IHeadMenuInfo):Promise<any>=>{
+    var res=axios.post(url+'/menu',menu)
     return res;
 }
 

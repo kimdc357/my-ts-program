@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { rootState } from '../../../redux/reducer'
 import { Dispatch } from 'redux'
 import { Menu } from 'antd';
-import { headMenu,headMenutest } from '../../../redux/page/action'
+import { headMenu } from '../../../redux/page/action'
 import { IHeadMenuInfo } from '../../../redux/page/reducer'
 
 
@@ -14,8 +14,7 @@ export interface IHeadMenuProps{
     headMenu?:(menu:{ resolve?:(value?:any)=>void,
         })=>void,
     headMenuResult?:any,
-    datas?:any
-    menus?:any
+
 }
 
 export interface IHeadMenuState{
@@ -23,8 +22,6 @@ export interface IHeadMenuState{
     })=>void,
     current: string[],
     headMenuResult?:any,
-    datas:any
-    menus:any
 }
 
 export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>{
@@ -33,8 +30,6 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
         super(props)
         this.state = {
             current: ['mail'],
-            datas:{},
-            menus:{}
           };
     }
 
@@ -64,10 +59,6 @@ export class BaseHeadMenu extends React.Component<IHeadMenuProps,IHeadMenuState>
     }
     }
 
-    componentDidMount(){
-       
-       console.log(this.props.headMenuResult)
-    }
 
     // menuItemSubBind(data:any,id:any){
     //    return( data.map((menu:any,i:any)=>{

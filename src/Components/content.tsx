@@ -6,7 +6,7 @@ import { Menu, Button } from 'antd'
 import './content.scss'
 import {LoginComponent} from './contents/login/login'
 import {RegistersComponent} from './contents/login/register'
-// import {LeftMenuComponent} from './contents/menu/leftmenu'
+import {LeftMenuComponent} from './contents/menu/leftmenu'
 
 export interface IContensProps{
 
@@ -35,13 +35,13 @@ class Contents extends React.Component<IContensProps,IcontensState>{
                     <Layout >
                         <Sider width={200} className="site-layout-background">
                        
-                        {/* <div>
-                        <LeftMenuComponent></LeftMenuComponent>
-                        </div> */}
                         <div>
+                        <LeftMenuComponent></LeftMenuComponent>
+                        </div>
+                        {/* <div>
                             <Button type='link' onClick={()=>this.onClickLink('denglu')}>登陆</Button>
                             <Button type='link' onClick={()=>this.onClickLink('zhuce')}>注册</Button>
-                        </div>
+                        </div> */}
                         </Sider>
                         <Layout style={{ padding: '0 24px 24px' }}>
                         <Content 

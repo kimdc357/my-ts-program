@@ -15,14 +15,15 @@ export interface IAlertInfo{
 }
 
 export interface IHeadMenuInfo{
-    id:number,
-    name:string,
-    url:string,
-    pid:number,
-    isLeaf:number,
-    status:number,
-    seq:number,
-    key:string
+    id?:number,
+    name?:string,
+    url?:string,
+    pid?:number,
+    isLeaf?:number,
+    status?:number,
+    seq?:number,
+    key?:string,
+    distinguish?:string
 }
 
 
@@ -52,8 +53,6 @@ export const pageReducer=(state=alertstate,action:any)=>{
                 return draftState
             case HEAD_MENU:
             case HEAD_TEST:
-                console.log('****************')
-                console.log(action)
                 draftState.headMenuResult=action.data
                 return draftState
             default:

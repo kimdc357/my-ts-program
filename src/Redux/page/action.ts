@@ -21,7 +21,7 @@ export const headMenu=(menu:{
     data:menu
 })
 
-export const headMenutest=(menu:any)=>({
+export const headMenuInfo=(menu:any)=>({
     type:HEAD_TEST,
     data:menu
 })
