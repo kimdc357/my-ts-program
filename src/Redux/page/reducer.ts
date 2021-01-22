@@ -1,11 +1,12 @@
-import { VERIFACTION,ALET_MESSAGE,HEAD_MENU,HEAD_TEST } from './types'
+import { VERIFACTION,ALET_MESSAGE,HEAD_MENU,HEAD_TEST,MOVING_MENU,MOVING_INFO } from './types'
 import { produce } from 'Immer'
 
 
 export interface PageState{
     alert:IAlertInfo,
     verifactionResult:boolean,
-    headMenuResult:any
+    headMenuResult:any,
+    movingResult:any
 }
 
 
@@ -33,7 +34,8 @@ export const alertstate={
         types:''
     },
     verifactionResult:true,
-    headMenuResult:{}
+    headMenuResult:{},
+    movingResult:{}
 }
 
 
@@ -54,6 +56,10 @@ export const pageReducer=(state=alertstate,action:any)=>{
             case HEAD_MENU:
             case HEAD_TEST:
                 draftState.headMenuResult=action.data
+                return draftState
+            case MOVING_INFO:
+            case MOVING_MENU:
+                draftState.movingResult=action.data
                 return draftState
             default:
                 return draftState

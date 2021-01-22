@@ -7,6 +7,7 @@ import './content.scss'
 import {LoginComponent} from './contents/login/login'
 import {RegistersComponent} from './contents/login/register'
 import {LeftMenuComponent} from './contents/menu/leftmenu'
+import {MovingMenuComponent} from './contents/menu/movingmenu'
 
 export interface IContensProps{
 
@@ -36,7 +37,8 @@ class Contents extends React.Component<IContensProps,IcontensState>{
                         <Sider width={200} className="site-layout-background">
                        
                         <div>
-                        <LeftMenuComponent></LeftMenuComponent>
+                        <MovingMenuComponent></MovingMenuComponent>
+                        {/* <LeftMenuComponent></LeftMenuComponent> */}
                         </div>
                         {/* <div>
                             <Button type='link' onClick={()=>this.onClickLink('denglu')}>登陆</Button>

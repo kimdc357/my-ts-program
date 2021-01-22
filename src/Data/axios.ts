@@ -25,3 +25,8 @@ export const head_menu_axios=(menu:IHeadMenuInfo):Promise<any>=>{
     return res;
 }
 
+export const moving_menu_axios=(menu:IHeadMenuInfo):Promise<any>=>{
+    var res=axios.post(url+'/movingmenu',menu)
+    return res
+}
+
